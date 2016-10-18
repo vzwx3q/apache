@@ -3,14 +3,14 @@ driver:
   name: ec2
   ENV['AWS_ACCESS_KEY_ID']: "<%= ENV['AWS_ACCESS_KEY_ID']%>"
   ENV['AWS_SECRET_ACCESS_KEY']: "<%= ENV['AWS_SECRET_ACCESS_KEY']%>"
-  transport.ssh_key: ~/.ssh/WebServer.pem
+  transport.ssh_key: /home/ubuntu/.ssh/WebServer.pem
   region: us-west-2
   availability_zone: a
   require_chef_omnibus: true
 
 
 transport:
-    ssh_key: ~/.ssh/WebServer.pem
+    ssh_key: /home/ubuntu/.ssh/WebServer.pem
 
 provisioner:
   name: chef_solo
