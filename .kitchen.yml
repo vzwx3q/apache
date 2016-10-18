@@ -1,22 +1,27 @@
 ---
 driver:
-  name: vagrant
+  name: ec2
+  ENV['AWS_ACCESS_KEY_ID']: "<%= ENV['AWS_ACCESS_KEY_ID']%>"
+  ENV['AWS_SECRET_ACCESS_KEY']: "<%= ENV['AWS_SECRET_ACCESS_KEY']%>"
+  transport.ssh_key: ~/.ssh/WebServer.pem
+  region: us-west-2
+  availability_zone: a
+  require_chef_omnibus: true
+
+
+transport:
+    ssh_key: ~/.ssh/WebServer.pem
 
 provisioner:
-  name: chef_zero
-
-verifier:
-  name: inspec
+  name: chef_solo
 
 platforms:
-  - name: ubuntu-16.04
-  - name: centos-7.2
+  - name: ubuntu-14.04
+    driver:
+        image_id: ami-d732f0b7
 
 suites:
   - name: default
     run_list:
       - recipe[apache::default]
-    verifier:
-      inspec_tests:
-        - test/recipes
     attributes:
